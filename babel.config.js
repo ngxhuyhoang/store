@@ -19,7 +19,7 @@ module.exports = {
         alias: {
           '@navigators': ['./src/navigators'],
           '@containers': ['./src/containers'],
-          '@stores': ['./src/stores'],
+          '@redux': ['./src/redux'],
           '@components': ['./src/components'],
           '@core': ['./src/core'],
           '@assets': ['./src/assets'],

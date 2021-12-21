@@ -13,7 +13,10 @@ const reducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer,
   devTools: __DEV__,
-  middleware: getDefaultMiddleware => getDefaultMiddleware(),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistor = persistStore(store);
