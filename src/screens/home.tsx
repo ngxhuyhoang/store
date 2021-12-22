@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,120 +10,84 @@ import {
 } from 'react-native';
 import styled from 'styled-components/native';
 
-const Container = styled.View``;
-const Home = () => {
-  const [data, getData] = useState([]);
+const Container = styled.ScrollView``;
+const Home = ({ navigation }) => {
+  const [dataProduct, getDataProduct] = useState([]);
   const get = async () => {
     const res = await axios.get('https://fakestoreapi.com/products');
-    getData(res.data);
+    getDataProduct(res.data);
   };
 
   useEffect(() => {
     get();
   }, []);
 
-  const RenderRestaurant = name => {
+  const Item = ({ name, img, price }) => {
     return (
-      <TouchableOpacity style={styleHome.popularRestaurant}>
-        <Text>{name}</Text>
+      <TouchableOpacity
+        style={styleHome.popularRestaurant}
+        onPress={() => navigation.navigate('Product Details')}>
+        <Text style={styleHome.titleProduct}>{name}</Text>
+        <Text>Price: {price}$</Text>
+        <Image source={{ uri: img }} style={styleHome.imgProduct} />
       </TouchableOpacity>
     );
   };
 
-  const renderPopularRestaurant = ({ item, index }) => {
-    <RenderRestaurant key={index} name={item.title} />;
+  const renderMenClothing = ({ item }) => {
+    return <Item name={item.title} img={item.image} price={item.price} />;
+  };
+
+  const renderWomenClothing = ({ item }) => {
+    return <Item name={item.title} img={item.image} price={item.price} />;
+  };
+
+  const renderAcessories = ({ item }) => {
+    return <Item name={item.title} img={item.image} price={item.price} />;
+  };
+
+  const renderElectronic = ({ item }) => {
+    return <Item name={item.title} img={item.image} price={item.price} />;
   };
 
   return (
-    <Container>
-      <Text style={styleHome.titileHome}>Find Your Favorite Clothes</Text>
-      <Text>Popular Restaurant</Text>
+    <Container showsVerticalScrollIndicator={false}>
+      <Text style={styleHome.titileHome}>Find Your Favorite Product</Text>
+      <Text>Popular Men's Cloth</Text>
       <View style={{ flexDirection: 'row', marginLeft: 10 }}>
         <FlatList
-          style={{ flex: 1, borderWidth: 1 }}
-          data={data}
-          renderItem={renderPopularRestaurant}
+          horizontal
+          data={dataProduct.filter(p => p.category === "men's clothing")}
+          renderItem={renderMenClothing}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
-      <Text>Popular Menu</Text>
-      <View style={{ flexDirection: 'row' }}>
-        <View>
-          <TouchableOpacity
-            style={{
-              width: 323,
-              height: 87,
-              marginVertical: 10,
-              marginTop: 10,
-              marginHorizontal: 20,
-              backgroundColor: 'blue',
-              borderRadius: 15,
-            }}></TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: 323,
-              height: 87,
-              marginVertical: 10,
-              marginTop: 10,
-              marginHorizontal: 20,
-              backgroundColor: 'blue',
-              borderRadius: 15,
-            }}></TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: 323,
-              height: 87,
-              marginVertical: 10,
-              marginTop: 10,
-              marginHorizontal: 20,
-              backgroundColor: 'blue',
-              borderRadius: 15,
-            }}></TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={{
-              width: 323,
-              height: 87,
-              marginVertical: 10,
-              marginTop: 10,
-              marginHorizontal: 20,
-              backgroundColor: 'blue',
-              borderRadius: 15,
-            }}></TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: 323,
-              height: 87,
-              marginVertical: 10,
-              marginTop: 10,
-              marginHorizontal: 20,
-              backgroundColor: 'blue',
-              borderRadius: 15,
-            }}></TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: 323,
-              height: 87,
-              marginVertical: 10,
-              marginTop: 10,
-              marginHorizontal: 20,
-              backgroundColor: 'blue',
-              borderRadius: 15,
-            }}></TouchableOpacity>
-        </View>
+      <Text>Popular Women's Cloth</Text>
+      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+        <FlatList
+          horizontal
+          data={dataProduct.filter(p => p.category === "women's clothing")}
+          renderItem={renderWomenClothing}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
-      <View
-        style={{
-          position: 'absolute',
-          borderWidth: 1,
-          margin: 20,
-          marginTop: 650,
-          borderColor: 'red',
-          width: 355,
-          height: 74,
-          borderRadius: 20,
-        }}>
-        <Text></Text>
+      <Text>Popular Acessories</Text>
+      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+        <FlatList
+          horizontal
+          data={dataProduct.filter(p => p.category === 'jewelery')}
+          renderItem={renderAcessories}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+      <Text>Popular Electronic</Text>
+      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+        <FlatList
+          horizontal
+          data={dataProduct.filter(p => p.category === 'electronics')}
+          renderItem={renderElectronic}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
     </Container>
   );
@@ -132,19 +97,32 @@ export default Home;
 
 const styleHome = StyleSheet.create({
   titileHome: {
-    marginLeft: 31,
+    marginLeft: 30,
+    marginRight: 30,
     marginTop: 30,
-    marginright: 111,
     fontWeight: 'bold',
-    fontSize: 29,
+    fontSize: 26,
   },
   popularRestaurant: {
     width: 147,
-    height: 184,
+    height: 220,
     backgroundColor: 'gray',
     borderRadius: 15,
     marginRight: 15,
     marginHorizontal: 10,
     marginVertical: 20,
+    justifyContent: 'space-between',
+  },
+  titleProduct: {
+    textAlign: 'center',
+    margin: 10,
+    fontSize: 12,
+  },
+  imgProduct: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+    borderRadius: 10,
+    marginBottom: 10,
   },
 });
