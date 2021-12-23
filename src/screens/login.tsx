@@ -38,18 +38,17 @@ const Login = ({ navigation }) => {
   );
 
   const createAlertLogin = () =>
-    Alert.alert('Login fail', 'Plase try again', [
+    Alert.alert('Login failed', 'username or password was wrong', [
       {
-        text: 'Congfirm',
+        text: 'Ok',
         onPress: () => {
           console.log('oke pressed');
         },
       },
     ]);
-  console.log('username: ', username, ' password:', password);
+
   const Verification = condition => {
     if (username === '' || password === '') {
-      console.log('empty');
       Alert.alert(
         'Username and Password can not be empty',
         'Please try again',
