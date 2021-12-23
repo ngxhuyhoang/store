@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   buttonGoogleLogin: { alignItems: 'center', marginLeft: 20 },
   buttunLogin: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 20,
   },
   logoImage: {
     marginTop: 30,
