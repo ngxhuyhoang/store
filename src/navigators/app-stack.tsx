@@ -16,7 +16,7 @@ const AppStack = () => {
       />
       <Stack.Screen name="Home" component={Home} />
 
-      <Stack.Screen name="Product Details" component={ProductDetails} />
+      <Stack.Screen name="ProductDetails" component={ProductDetails} />
     </Stack.Navigator>
   );
 };

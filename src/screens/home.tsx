@@ -13,10 +13,10 @@ import styled from 'styled-components/native';
 const Container = styled.ScrollView``;
 
 const Home = ({ navigation }) => {
-  const [dataProduct, getDataProduct] = useState([]);
+  const [products, setProducts] = useState([]);
   const getProductAsync = async () => {
     const res = await axios.get('https://fakestoreapi.com/products');
-    getDataProduct(res.data);
+    setProducts(res.data);
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Home = ({ navigation }) => {
     return (
       <TouchableOpacity
         style={styleHome.popularRestaurant}
-        onPress={() => navigation.navigate('Product Details')}>
+        onPress={() => navigation.navigate('ProductDetails')}>
         <Text style={styleHome.titleProduct}>{name}</Text>
         <Text>Price: {price}$</Text>
         <Image source={{ uri: img }} style={styleHome.imgProduct} />
@@ -35,19 +35,7 @@ const Home = ({ navigation }) => {
     );
   };
 
-  const renderMenClothing = ({ item }) => {
-    return <Item name={item.title} img={item.image} price={item.price} />;
-  };
-
-  const renderWomenClothing = ({ item }) => {
-    return <Item name={item.title} img={item.image} price={item.price} />;
-  };
-
-  const renderAcessories = ({ item }) => {
-    return <Item name={item.title} img={item.image} price={item.price} />;
-  };
-
-  const renderElectronic = ({ item }) => {
+  const renderProduct = ({ item }) => {
     return <Item name={item.title} img={item.image} price={item.price} />;
   };
 
@@ -55,38 +43,38 @@ const Home = ({ navigation }) => {
     <Container showsVerticalScrollIndicator={false}>
       <Text style={styleHome.titileHome}>Find Your Favorite Product</Text>
       <Text>Popular Men's Cloth</Text>
-      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+      <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={dataProduct.filter(p => p.category === "men's clothing")}
-          renderItem={renderMenClothing}
+          data={products.filter(p => p.category === "men's clothing")}
+          renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
       </View>
       <Text>Popular Women's Cloth</Text>
-      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+      <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={dataProduct.filter(p => p.category === "women's clothing")}
-          renderItem={renderWomenClothing}
+          data={products.filter(p => p.category === "women's clothing")}
+          renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
       </View>
       <Text>Popular Acessories</Text>
-      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+      <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={dataProduct.filter(p => p.category === 'jewelery')}
-          renderItem={renderAcessories}
+          data={products.filter(p => p.category === 'jewelery')}
+          renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
       </View>
       <Text>Popular Electronic</Text>
-      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+      <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={dataProduct.filter(p => p.category === 'electronics')}
-          renderItem={renderElectronic}
+          data={products.filter(p => p.category === 'electronics')}
+          renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
       </View>
@@ -97,6 +85,10 @@ const Home = ({ navigation }) => {
 export default Home;
 
 const styleHome = StyleSheet.create({
+  styleProduct: {
+    flexDirection: 'row',
+    marginLeft: 10,
+  },
   titileHome: {
     marginLeft: 30,
     marginRight: 30,

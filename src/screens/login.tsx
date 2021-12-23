@@ -22,13 +22,12 @@ const Login = ({ navigation }) => {
   const getAccount = async () => {
     const res = await axios.get('https://fakestoreapi.com/users');
     setAllAcount(res.data);
-    console.log(res.data);
   };
   useEffect(() => {
     getAccount();
   }, []);
 
-  const accountVerification = allAcount.filter(
+  const handleVerification = allAcount.filter(
     (login: { username: string; password: string }) => {
       return (
         (login.username === username || login.email === username) &&
@@ -41,31 +40,19 @@ const Login = ({ navigation }) => {
     Alert.alert('Login failed', 'username or password was wrong', [
       {
         text: 'Ok',
-        onPress: () => {
-          console.log('oke pressed');
-        },
       },
     ]);
 
-  const Verification = condition => {
+  const Verification = (condition: string | any[]) => {
     if (username === '' || password === '') {
       Alert.alert(
         'Username and Password can not be empty',
         'Please try again',
-        [
-          {
-            text: 'Congfirm',
-            onPress: () => {
-              console.log('confirm pressed');
-            },
-          },
-        ],
+        [{ text: 'Congfirm' }],
       );
     } else if (condition.length !== 1) {
-      console.log('login fail');
       createAlertLogin();
     } else {
-      console.log('success');
       navigation.navigate('Home');
     }
   };
@@ -90,13 +77,13 @@ const Login = ({ navigation }) => {
         />
         <Text style={styles.subText2}>Or Continue With</Text>
         <TouchableOpacity style={styles.button} onPress={() => {}}>
-          <Image source={Icon.Google} style={{ marginLeft: 25 }} />
-          <Text style={{ alignItems: 'center', marginLeft: 10 }}>Google</Text>
+          <Image source={Icon.Google} style={styles.buttonGoogleLogin} />
+          <Text style={styles.buttonGoogleLogin}>Google</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.loginButton}
-          onPress={() => Verification(accountVerification)}>
-          <Text style={{ alignItems: 'center', marginTop: 20 }}>LOGIN</Text>
+          onPress={() => Verification(handleVerification)}>
+          <Text style={styles.buttunLogin}>LOGIN</Text>
         </TouchableOpacity>
       </ScrollView>
     </Container>
@@ -106,6 +93,11 @@ const Login = ({ navigation }) => {
 export default Login;
 
 const styles = StyleSheet.create({
+  buttonGoogleLogin: { alignItems: 'center', marginLeft: 20 },
+  buttunLogin: {
+    alignItems: 'center',
+    marginTop: 10,
+  },
   logoImage: {
     marginTop: 30,
     alignSelf: 'center',
