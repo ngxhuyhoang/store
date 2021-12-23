@@ -11,6 +11,7 @@ import {
 import styled from 'styled-components/native';
 
 const Container = styled.ScrollView``;
+
 const Home = ({ navigation }) => {
   const [dataProduct, getDataProduct] = useState([]);
   const get = async () => {
