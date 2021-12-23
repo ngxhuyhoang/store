@@ -14,13 +14,13 @@ const Container = styled.ScrollView``;
 
 const Home = ({ navigation }) => {
   const [dataProduct, getDataProduct] = useState([]);
-  const get = async () => {
+  const getProductAsync = async () => {
     const res = await axios.get('https://fakestoreapi.com/products');
     getDataProduct(res.data);
   };
 
   useEffect(() => {
-    get();
+    getProductAsync();
   }, []);
 
   const Item = ({ name, img, price }) => {
