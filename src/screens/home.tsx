@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
@@ -12,7 +13,9 @@ import styled from 'styled-components/native';
 
 const Container = styled.ScrollView``;
 
-const Home = ({ navigation }) => {
+const Home = () => {
+  const navigation = useNavigation();
+
   const [products, setProducts] = useState([]);
   const getProductAsync = async () => {
     const res = await axios.get('https://fakestoreapi.com/products');
@@ -23,7 +26,15 @@ const Home = ({ navigation }) => {
     getProductAsync();
   }, []);
 
-  const Item = ({ name, img, price }) => {
+  const Item = ({
+    name,
+    img,
+    price,
+  }: {
+    name: string;
+    img: string;
+    price: number;
+  }) => {
     return (
       <TouchableOpacity
         style={styleHome.popularRestaurant}
@@ -35,7 +46,11 @@ const Home = ({ navigation }) => {
     );
   };
 
-  const renderProduct = ({ item }) => {
+  const renderProduct = ({
+    item,
+  }: {
+    item: { title: string; image: string; price: number };
+  }) => {
     return <Item name={item.title} img={item.image} price={item.price} />;
   };
 
@@ -46,7 +61,7 @@ const Home = ({ navigation }) => {
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={products.filter(p => p.category === "men's clothing")}
+          data={products.filter((p: any) => p.category === "men's clothing")}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
@@ -55,7 +70,7 @@ const Home = ({ navigation }) => {
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={products.filter(p => p.category === "women's clothing")}
+          data={products.filter((p: any) => p.category === "women's clothing")}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
@@ -64,7 +79,7 @@ const Home = ({ navigation }) => {
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={products.filter(p => p.category === 'jewelery')}
+          data={products.filter((p: any) => p.category === 'jewelery')}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
@@ -73,7 +88,7 @@ const Home = ({ navigation }) => {
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
-          data={products.filter(p => p.category === 'electronics')}
+          data={products.filter((p: any) => p.category === 'electronics')}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
         />
