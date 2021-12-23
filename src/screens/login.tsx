@@ -1,5 +1,6 @@
 import { Icon } from '@core/icons';
 import { AppImage } from '@core/images';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
@@ -15,7 +16,8 @@ import styled from 'styled-components/native';
 
 const Container = styled.View``;
 
-const Login = ({ navigation }) => {
+const Login = () => {
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [allAcount, setAllAcount] = useState([]);
@@ -28,7 +30,7 @@ const Login = ({ navigation }) => {
   }, []);
 
   const handleVerification = allAcount.filter(
-    (login: { username: string; password: string }) => {
+    (login: { username: string; password: string; email: string }) => {
       return (
         (login.username === username || login.email === username) &&
         login.password === password
