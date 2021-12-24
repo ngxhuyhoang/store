@@ -1,3 +1,4 @@
+import { Icon } from '@core/icons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -9,11 +10,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components/native';
 
 const Container = styled.ScrollView``;
 
 const Home = () => {
+  const cartState = useSelector(state => state.cart.cart);
   const navigation = useNavigation();
 
   const [products, setProducts] = useState([]);
@@ -26,19 +29,38 @@ const Home = () => {
     getProductAsync();
   }, []);
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Cart');
+          }}>
+          <Image source={Icon.Cart} />
+          <Text>Cart</Text>
+          <View style={styleHome.numNoti}>
+            <Text style={{ fontSize: 10 }}>{cartState.length}</Text>
+          </View>
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
+
   const Item = ({
     name,
     img,
     price,
+    idProduct,
   }: {
     name: string;
     img: string;
     price: number;
+    idProduct: number;
   }) => {
     return (
       <TouchableOpacity
         style={styleHome.popularRestaurant}
-        onPress={() => navigation.navigate('ProductDetails')}>
+        onPress={() => navigation.navigate('ProductDetails', { idProduct })}>
         <Text style={styleHome.titleProduct}>{name}</Text>
         <Text>Price: {price}$</Text>
         <Image source={{ uri: img }} style={styleHome.imgProduct} />
@@ -49,9 +71,16 @@ const Home = () => {
   const renderProduct = ({
     item,
   }: {
-    item: { title: string; image: string; price: number };
+    item: { title: string; image: string; price: number; idProduct: number };
   }) => {
-    return <Item name={item.title} img={item.image} price={item.price} />;
+    return (
+      <Item
+        name={item.title}
+        img={item.image}
+        price={item.price}
+        idProduct={item.id}
+      />
+    );
   };
 
   return (
@@ -132,5 +161,14 @@ const styleHome = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
     marginBottom: 10,
+  },
+  numNoti: {
+    position: 'absolute',
+    backgroundColor: 'red',
+    borderRadius: 999,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    top: -5,
+    right: 0,
   },
 });

@@ -1,4 +1,4 @@
-package com.foodninja;
+package com.chien.store;
 
 import com.facebook.react.ReactActivity;
 
