@@ -40,14 +40,13 @@ const ProductDetails = () => {
             navigation.navigate('Cart');
           }}>
           <Image source={Icon.Cart} />
-          <Text>Cart</Text>
           <View style={stylePrdDetails.numNoti}>
             <Text style={{ fontSize: 10 }}>{cartState.length}</Text>
           </View>
         </TouchableOpacity>
       ),
     });
-  }, []);
+  }, [cartState.length]);
 
   return (
     <ScrollView contentContainerStyle={{ paddingHorizontal: 16 }}>
@@ -124,7 +123,7 @@ const stylePrdDetails = StyleSheet.create({
     borderRadius: 999,
     paddingVertical: 4,
     paddingHorizontal: 6,
-    top: -5,
-    right: 0,
+    top: -10,
+    right: -10,
   },
 });

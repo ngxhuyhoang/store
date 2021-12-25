@@ -37,14 +37,13 @@ const Home = () => {
             navigation.navigate('Cart');
           }}>
           <Image source={Icon.Cart} />
-          <Text>Cart</Text>
           <View style={styleHome.numNoti}>
             <Text style={{ fontSize: 10 }}>{cartState.length}</Text>
           </View>
         </TouchableOpacity>
       ),
     });
-  }, []);
+  }, [cartState.length]);
 
   const Item = ({
     name,
@@ -168,7 +167,7 @@ const styleHome = StyleSheet.create({
     borderRadius: 999,
     paddingVertical: 4,
     paddingHorizontal: 6,
-    top: -5,
-    right: 0,
+    top: -10,
+    right: -10,
   },
 });

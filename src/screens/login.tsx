@@ -1,6 +1,4 @@
-import { Icon } from '@core/icons';
 import { AppImage } from '@core/images';
-import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
@@ -13,45 +11,32 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styled from 'styled-components/native';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
+import { useDispatch } from 'react-redux';
+import { authActions } from '@redux/slices/auth';
 
 const Container = styled.View``;
 
 const Login = () => {
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [allAcount, setAllAcount] = useState([]);
 
-  async function onGoogleButtonPress() {
-    GoogleSignin.configure({
-      webClientId:
-        '875743579018-gccd3h5ik79q4juskjeicng5hrn20nv4.apps.googleusercontent.com',
-    });
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  }
   const userAdmin = {
     address: {
       geolocation: { lat: '-37.3159', long: '81.1496' },
-      city: 'kilcoole',
-      street: 'new road',
+      city: 'Hà Nội',
+      street: 'Yên Duyên',
       number: 7682,
-      zipcode: '12926-3874',
+      zipcode: '10000',
     },
     id: 21,
     email: 'conlilo273@gmail.com',
     username: 'Conlilo',
     password: '123456',
-    name: { firstname: 'john', lastname: 'doe' },
-    phone: '1-570-236-7033',
+    name: { firstname: 'Nguyễn', lastname: 'Chiến' },
+    phone: '098-429-8754',
   };
   const getAccount = async () => {
     const res = await axios.get('https://fakestoreapi.com/users');
@@ -87,7 +72,7 @@ const Login = () => {
     } else if (condition.length !== 1) {
       createAlertLogin();
     } else {
-      navigation.navigate('Home');
+      dispatch(authActions.onLogin({ username, password }));
     }
   };
 
@@ -109,8 +94,8 @@ const Login = () => {
           style={styles.inputText}
           placeholder=" Password"
         />
-        <Text style={styles.subText2}>Or Continue With</Text>
-        <TouchableOpacity
+        {/* <Text style={styles.subText2}>Or Continue With</Text> */}
+        {/* <TouchableOpacity
           style={styles.button}
           onPress={() =>
             onGoogleButtonPress().then(() =>
@@ -119,7 +104,7 @@ const Login = () => {
           }>
           <Image source={Icon.Google} style={styles.buttonGoogleLogin} />
           <Text style={styles.buttonGoogleLogin}>Google</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.loginButton}
           onPress={() => Verification(handleVerification)}>

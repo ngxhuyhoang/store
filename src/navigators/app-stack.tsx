@@ -1,26 +1,12 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../screens/home';
-import Login from '@screens/login';
-import ProductDetails from '@screens/productdetails';
-import Cart from '@screens/cart';
-
-const Stack = createNativeStackNavigator();
+import { useSelector } from 'react-redux';
+import AuthStack from './auth-stack';
+import TabNavigator from './tab-navigator';
 
 const AppStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Cart" component={Cart} />
+  const isSignedIn = useSelector(state => state.auth.isSignedIn);
 
-      <Stack.Screen name="ProductDetails" component={ProductDetails} />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
+  return <>{isSignedIn ? <TabNavigator /> : <AuthStack />}</>;
 };
 
 export default AppStack;
