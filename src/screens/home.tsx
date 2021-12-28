@@ -92,6 +92,7 @@ const Home = () => {
           data={products.filter((p: any) => p.category === "men's clothing")}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item?.idProduct?.toString()}
         />
       </View>
       <Text>Popular Women's Cloth</Text>
@@ -142,7 +143,7 @@ const styleHome = StyleSheet.create({
   popularRestaurant: {
     width: 147,
     height: 220,
-    backgroundColor: 'gray',
+    borderWidth: 1,
     borderRadius: 15,
     marginRight: 15,
     marginHorizontal: 10,

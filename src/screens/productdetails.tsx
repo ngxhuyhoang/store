@@ -65,6 +65,7 @@ const ProductDetails = () => {
           style={stylePrdDetails.btnAddToCart}
           onPress={() => {
             dispatch(cartActions.addToCart(productDetails));
+            dispatch(cartActions.caculateTotalPrice(productDetails.price));
           }}>
           <Text style={stylePrdDetails.textAddToCart}>ADD TO CART</Text>
         </TouchableOpacity>

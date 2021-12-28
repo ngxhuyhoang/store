@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isSignedIn: false,
+  username: '',
 };
 
 const authSlice = createSlice({
@@ -9,11 +10,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     onLogin: (state, action) => {
-      if (
-        action.payload.username === 'Conlilo' &&
-        action.payload.password === '123456'
-      ) {
+      if (action.payload.login === 'login success') {
         state.isSignedIn = true;
+        state.username = action.payload.username;
+      }
+    },
+    onLogout: (state, action) => {
+      if (action.payload === 'user logout') {
+        state.isSignedIn = false;
       }
     },
   },

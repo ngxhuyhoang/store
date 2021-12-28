@@ -72,7 +72,7 @@ const Login = () => {
     } else if (condition.length !== 1) {
       createAlertLogin();
     } else {
-      dispatch(authActions.onLogin({ username, password }));
+      dispatch(authActions.onLogin({ login: 'login success', username }));
     }
   };
 
@@ -118,7 +118,7 @@ const Login = () => {
 export default Login;
 
 const styles = StyleSheet.create({
-  buttonGoogleLogin: { alignItems: 'center', marginLeft: 20 },
+  // buttonGoogleLogin: { alignItems: 'center', marginLeft: 20 },
   buttunLogin: {
     alignItems: 'center',
     marginTop: 20,
@@ -154,22 +154,22 @@ const styles = StyleSheet.create({
     marginTop: 12,
     borderColor: 'gray',
   },
-  subText2: {
-    marginVertical: 20,
-    alignSelf: 'center',
-    fontSize: 12,
-    fontWeight: 'bold',
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 15,
-    width: 152,
-    height: 57,
-    alignSelf: 'center',
-    flexDirection: 'row',
-  },
+  // subText2: {
+  //   marginVertical: 20,
+  //   alignSelf: 'center',
+  //   fontSize: 12,
+  //   fontWeight: 'bold',
+  // },
+  // button: {
+  //   alignItems: 'center',
+  //   backgroundColor: '#fff',
+  //   padding: 10,
+  //   borderRadius: 15,
+  //   width: 152,
+  //   height: 57,
+  //   alignSelf: 'center',
+  //   flexDirection: 'row',
+  // },
   loginButton: {
     alignItems: 'center',
     backgroundColor: '#53E88B',
