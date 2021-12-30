@@ -9,9 +9,21 @@ const Stack = createNativeStackNavigator();
 const RootStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen name="ProductDetails" component={ProductDetails} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ title: 'Trang chủ' }}
+      />
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{ title: 'Giỏ hàng' }}
+      />
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
+        options={{ title: 'Chi tiết sản phẩm' }}
+      />
     </Stack.Navigator>
   );
 };

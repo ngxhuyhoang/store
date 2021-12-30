@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components/native';
 
@@ -64,7 +65,7 @@ const Home = () => {
         <Text>
           Price: <Text style={styleHome.cssColor53E88B}>{price}$</Text>
         </Text>
-        <Image source={{ uri: img }} style={styleHome.imgProduct} />
+        <FastImage source={{ uri: img }} style={styleHome.imgProduct} />
       </TouchableOpacity>
     );
   };
@@ -94,7 +95,7 @@ const Home = () => {
           data={products.filter((p: any) => p.category === "men's clothing")}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item?.idProduct?.toString()}
+          keyExtractor={item => item.id.toString()}
         />
       </View>
       <Text style={styleHome.titleTypeProduct}>Popular Women's Cloth</Text>
@@ -104,7 +105,7 @@ const Home = () => {
           data={products.filter((p: any) => p.category === "women's clothing")}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item?.idProduct?.toString()}
+          keyExtractor={item => item?.id?.toString()}
         />
       </View>
       <Text style={styleHome.titleTypeProduct}>Popular Acessories</Text>
@@ -114,7 +115,7 @@ const Home = () => {
           data={products.filter((p: any) => p.category === 'jewelery')}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item?.idProduct?.toString()}
+          keyExtractor={item => item?.id?.toString()}
         />
       </View>
       <Text style={styleHome.titleTypeProduct}>Popular Electronic</Text>
@@ -124,7 +125,7 @@ const Home = () => {
           data={products.filter((p: any) => p.category === 'electronics')}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item?.idProduct?.toString()}
+          keyExtractor={item => item?.id?.toString()}
         />
       </View>
     </Container>

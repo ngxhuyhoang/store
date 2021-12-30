@@ -13,6 +13,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { Icon } from '@core/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '@redux/slices/cart';
+import FastImage from 'react-native-fast-image';
 
 const ProductDetails = () => {
   const navigation = useNavigation();
@@ -51,7 +52,7 @@ const ProductDetails = () => {
   return (
     <ScrollView contentContainerStyle={stylePrdDetails.cssPaddingHorizontal}>
       <Text style={stylePrdDetails.titlePrdDetail}>{productDetails.title}</Text>
-      <Image
+      <FastImage
         source={{
           uri: productDetails.image,
         }}

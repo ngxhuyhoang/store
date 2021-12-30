@@ -58,7 +58,9 @@ const Cart = () => {
             </View>
             <Text>
               Price:{' '}
-              <Text style={styleCart.cssColor53E88B}>{price * quantity}$</Text>
+              <Text style={styleCart.cssColor53E88B}>
+                {(price * quantity).toFixed(2)}$
+              </Text>
             </Text>
           </View>
         </View>
