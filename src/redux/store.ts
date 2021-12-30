@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: 'cart',
 };
 
 const reducer = persistReducer(persistConfig, rootReducer);
@@ -13,7 +14,10 @@ const reducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer,
   devTools: __DEV__,
-  middleware: getDefaultMiddleware => getDefaultMiddleware(),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistor = persistStore(store);

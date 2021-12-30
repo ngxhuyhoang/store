@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.foodninja",
+    package = "com.chien.store",
 )
 
 android_resource(
     name = "res",
-    package = "com.foodninja",
+    package = "com.chien.store",
     res = "src/main/res",
 )
 
