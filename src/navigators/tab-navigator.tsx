@@ -15,7 +15,7 @@ export default function TabNavigator() {
         component={RootStack}
         options={{
           headerShown: false,
-          tabBarIcon: ({ focused, color }) => (
+          tabBarIcon: ({ color }) => (
             <Image source={Icon.Product} style={{ tintColor: color }} />
           ),
         }}
@@ -24,7 +24,7 @@ export default function TabNavigator() {
         name="Account"
         component={Account}
         options={{
-          tabBarIcon: ({ focused, color }) => (
+          tabBarIcon: ({ color }) => (
             <Image source={Icon.Account} style={{ tintColor: color }} />
           ),
         }}
