@@ -59,7 +59,8 @@ const ProductDetails = () => {
       />
       <View style={stylePrdDetails.viewPricePrdDetail}>
         <Text style={stylePrdDetails.pricePrdDetail}>
-          Price: {productDetails.price}$
+          Price:{' '}
+          <Text style={{ color: '#53E88B' }}>{productDetails.price}$</Text>
         </Text>
         <TouchableOpacity
           style={stylePrdDetails.btnAddToCart}
@@ -110,7 +111,7 @@ const stylePrdDetails = StyleSheet.create({
     paddingHorizontal: 8,
   },
   textAddToCart: { color: 'white' },
-  pricePrdDetail: { fontSize: 16 },
+  pricePrdDetail: { fontSize: 20 },
   viewPricePrdDetail: {
     marginTop: 8,
     flex: 1,
@@ -122,8 +123,8 @@ const stylePrdDetails = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'red',
     borderRadius: 999,
-    paddingVertical: 4,
-    paddingHorizontal: 6,
+    paddingVertical: 5,
+    paddingHorizontal: 3,
     top: -10,
     right: -10,
   },

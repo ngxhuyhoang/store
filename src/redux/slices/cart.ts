@@ -37,7 +37,6 @@ const quantityDecreament = (state, action) => {
   }
 
   if (state.cart[existedProductIndex].quantity === 0) {
-    console.log('ahhaha');
     state.cart = state.cart.filter(x => x.id !== action.payload.id);
   }
 };

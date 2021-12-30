@@ -67,12 +67,12 @@ const Login = () => {
       Alert.alert(
         'Username and Password can not be empty',
         'Please try again',
-        [{ text: 'Congfirm' }],
+        [{ text: 'Confirm' }],
       );
     } else if (condition.length !== 1) {
       createAlertLogin();
     } else {
-      dispatch(authActions.onLogin({ login: 'login success', username }));
+      dispatch(authActions.onLogin({ login: 'login-success', username }));
     }
   };
 
@@ -94,17 +94,6 @@ const Login = () => {
           style={styles.inputText}
           placeholder=" Password"
         />
-        {/* <Text style={styles.subText2}>Or Continue With</Text> */}
-        {/* <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            onGoogleButtonPress().then(() =>
-              console.log('Signed in with Google!'),
-            )
-          }>
-          <Image source={Icon.Google} style={styles.buttonGoogleLogin} />
-          <Text style={styles.buttonGoogleLogin}>Google</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.loginButton}
           onPress={() => Verification(handleVerification)}>
@@ -118,7 +107,6 @@ const Login = () => {
 export default Login;
 
 const styles = StyleSheet.create({
-  // buttonGoogleLogin: { alignItems: 'center', marginLeft: 20 },
   buttunLogin: {
     alignItems: 'center',
     marginTop: 20,
@@ -154,22 +142,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
     borderColor: 'gray',
   },
-  // subText2: {
-  //   marginVertical: 20,
-  //   alignSelf: 'center',
-  //   fontSize: 12,
-  //   fontWeight: 'bold',
-  // },
-  // button: {
-  //   alignItems: 'center',
-  //   backgroundColor: '#fff',
-  //   padding: 10,
-  //   borderRadius: 15,
-  //   width: 152,
-  //   height: 57,
-  //   alignSelf: 'center',
-  //   flexDirection: 'row',
-  // },
   loginButton: {
     alignItems: 'center',
     backgroundColor: '#53E88B',

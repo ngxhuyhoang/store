@@ -10,13 +10,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     onLogin: (state, action) => {
-      if (action.payload.login === 'login success') {
+      if (action.payload.login === 'login-success') {
         state.isSignedIn = true;
         state.username = action.payload.username;
       }
     },
     onLogout: (state, action) => {
-      if (action.payload === 'user logout') {
+      if (action.payload === 'user-logout') {
         state.isSignedIn = false;
       }
     },

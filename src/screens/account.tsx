@@ -1,7 +1,15 @@
+import { AppImage } from '@core/images';
 import { authActions } from '@redux/slices/auth';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 const Account = () => {
@@ -36,17 +44,10 @@ const Account = () => {
     Alert.alert('Logout', 'Are you sure to logout?', [
       {
         text: 'Logout',
-        onPress: () => dispatch(authActions.onLogout('user logout')),
+        onPress: () => dispatch(authActions.onLogout('user-logout')),
       },
       { text: 'Cancel' },
     ]);
-  };
-
-  const capitalize = (s: any) => {
-    if (typeof s !== 'string') {
-      return '';
-    }
-    return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
   useEffect(() => {
@@ -55,16 +56,25 @@ const Account = () => {
 
   return (
     <SafeAreaView style={styleAccountScreen.accountStyle}>
-      <Text>
-        Name : {capitalize(userProfile?.name?.firstname)}{' '}
-        {capitalize(userProfile?.name?.lastname)}
-      </Text>
-      <Text>Email: {userProfile?.email}</Text>
-      <Text>
-        Address: {userProfile?.address?.street} street,
+      <View style={{ flexDirection: 'row' }}>
+        <Image source={AppImage.Profile} />
+        <View style={{ flexDirection: 'column' }}>
+          <Text style={styleAccountScreen.nameInfo}>Name: </Text>
+          <Text style={styleAccountScreen.userNameInfo}>
+            {`${userProfile?.name?.firstname} ${userProfile?.name?.lastname}`}
+          </Text>
+        </View>
+      </View>
+
+      <Text style={styleAccountScreen.titleInfo}>Email:</Text>
+      <Text style={styleAccountScreen.userInfo}>{userProfile?.email}</Text>
+      <Text style={styleAccountScreen.titleInfo}>Address:</Text>
+      <Text style={styleAccountScreen.userInfo}>
+        {userProfile?.address?.street} street,
         {userProfile?.address?.city}
       </Text>
-      <Text>Phone: {userProfile?.phone}</Text>
+      <Text style={styleAccountScreen.titleInfo}>Phone: </Text>
+      <Text style={styleAccountScreen.userInfo}>{userProfile?.phone}</Text>
 
       <TouchableOpacity
         style={styleAccountScreen.btnLogout}
@@ -91,5 +101,13 @@ const styleAccountScreen = StyleSheet.create({
     paddingHorizontal: 16,
     justifyContent: 'space-between',
     height: 300,
+  },
+  titleInfo: { fontSize: 30, marginTop: 30 },
+  userInfo: { marginLeft: 14, fontSize: 24 },
+  nameInfo: { marginLeft: 10, fontSize: 30 },
+  userNameInfo: {
+    marginLeft: 10,
+    fontSize: 24,
+    textTransform: 'capitalize',
   },
 });

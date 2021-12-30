@@ -61,7 +61,9 @@ const Home = () => {
         style={styleHome.popularRestaurant}
         onPress={() => navigation.navigate('ProductDetails', { idProduct })}>
         <Text style={styleHome.titleProduct}>{name}</Text>
-        <Text>Price: {price}$</Text>
+        <Text>
+          Price: <Text style={{ color: '#53E88B' }}>{price}$</Text>
+        </Text>
         <Image source={{ uri: img }} style={styleHome.imgProduct} />
       </TouchableOpacity>
     );
@@ -85,7 +87,7 @@ const Home = () => {
   return (
     <Container showsVerticalScrollIndicator={false}>
       <Text style={styleHome.titileHome}>Find Your Favorite Product</Text>
-      <Text>Popular Men's Cloth</Text>
+      <Text style={styleHome.titleTypeProduct}>Popular Men's Cloth</Text>
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
@@ -95,31 +97,34 @@ const Home = () => {
           keyExtractor={item => item?.idProduct?.toString()}
         />
       </View>
-      <Text>Popular Women's Cloth</Text>
+      <Text style={styleHome.titleTypeProduct}>Popular Women's Cloth</Text>
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
           data={products.filter((p: any) => p.category === "women's clothing")}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item?.idProduct?.toString()}
         />
       </View>
-      <Text>Popular Acessories</Text>
+      <Text style={styleHome.titleTypeProduct}>Popular Acessories</Text>
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
           data={products.filter((p: any) => p.category === 'jewelery')}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item?.idProduct?.toString()}
         />
       </View>
-      <Text>Popular Electronic</Text>
+      <Text style={styleHome.titleTypeProduct}>Popular Electronic</Text>
       <View style={styleHome.styleProduct}>
         <FlatList
           horizontal
           data={products.filter((p: any) => p.category === 'electronics')}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item?.idProduct?.toString()}
         />
       </View>
     </Container>
@@ -154,6 +159,7 @@ const styleHome = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     fontSize: 12,
+    fontWeight: 'bold',
   },
   imgProduct: {
     width: 100,
@@ -165,10 +171,14 @@ const styleHome = StyleSheet.create({
   numNoti: {
     position: 'absolute',
     backgroundColor: 'red',
-    borderRadius: 999,
-    paddingVertical: 4,
-    paddingHorizontal: 6,
+    borderRadius: 99,
+    paddingVertical: 5,
+    paddingHorizontal: 3,
     top: -10,
-    right: -10,
+    right: -6,
+  },
+  titleTypeProduct: {
+    marginLeft: 10,
+    fontWeight: 'bold',
   },
 });

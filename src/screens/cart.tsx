@@ -34,33 +34,35 @@ const Cart = () => {
     return (
       <View style={styleCart.cartItem}>
         <View style={{ flexDirection: 'row' }}>
-          <Image source={{ uri: image }} style={{ width: 40, height: 40 }} />
-          <Text>{title}</Text>
-        </View>
-
-        <View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Quantily: </Text>
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(cartActions.quantityDecreament({ id }));
-                dispatch(cartActions.caculateTotalPrice());
-              }}>
-              <Image source={Icon.Minus} style={styleCart.iconQuantity} />
-            </TouchableOpacity>
-            <Text style={{ borderWidth: 1 }}> {quantity} </Text>
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(cartActions.quantityIncreament({ id }));
-                dispatch(cartActions.caculateTotalPrice());
-              }}>
-              <Image source={Icon.Plus} style={styleCart.iconQuantity} />
-            </TouchableOpacity>
+          <Image source={{ uri: image }} style={styleCart.imgCart} />
+          <View style={{ marginLeft: 10 }}>
+            <Text style={{ paddingRight: 30 }}>{title}</Text>
+            <View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Quantily: </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(cartActions.quantityDecreament({ id }));
+                    dispatch(cartActions.caculateTotalPrice());
+                  }}>
+                  <Image source={Icon.Minus} style={styleCart.iconQuantity} />
+                </TouchableOpacity>
+                <Text style={{ borderWidth: 1 }}> {quantity} </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(cartActions.quantityIncreament({ id }));
+                    dispatch(cartActions.caculateTotalPrice());
+                  }}>
+                  <Image source={Icon.Plus} style={styleCart.iconQuantity} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <Text>
+              Price:{' '}
+              <Text style={{ color: '#53E88B' }}>{price * quantity}$</Text>
+            </Text>
           </View>
         </View>
-        <Text>
-          Price: <Text style={{ color: '#53E88B' }}>{price * quantity}$</Text>
-        </Text>
       </View>
     );
   };
@@ -87,21 +89,25 @@ const Cart = () => {
     );
   };
   return (
-    <ScrollView style={styleCart.cartScreen}>
-      <Text>Order Product Detail</Text>
-      <FlatList
-        data={cartState}
-        renderItem={renderOrderProduct}
-        keyExtractor={item => item?.id?.toString()}
-        showsVerticalScrollIndicator={false}
-      />
-      <TouchableOpacity
-        style={styleCart.btnPayment}
-        onPress={() => Alert.alert('Payment success')}>
-        <Text>Payment</Text>
-        <Text>Total: {totalPrice?.toFixed(2)}$</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    <View style={styleCart.cartScreen}>
+      <View>
+        <Text style={styleCart.titleCart}>Your Order</Text>
+        <TouchableOpacity
+          style={styleCart.btnPayment}
+          onPress={() => Alert.alert('Payment success')}>
+          <Text>Payment</Text>
+          <Text>Total: {totalPrice?.toFixed(2)}$</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styleCart.styleFlatlist}>
+        <FlatList
+          data={cartState}
+          renderItem={renderOrderProduct}
+          keyExtractor={item => item?.id?.toString()}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </View>
   );
 };
 export default Cart;
@@ -115,19 +121,35 @@ const styleCart = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 16,
+    position: 'absolute',
   },
-  iconQuantity: { width: 40, height: 20 },
+  iconQuantity: { width: 40, height: 20, borderRadius: 10 },
   cartItem: {
     flex: 1,
     borderWidth: 1,
+    borderBottomWidth: 5,
+    borderBottomColor: '#a6a6a6',
     marginVertical: 5,
     marginHorizontal: 15,
     paddingHorizontal: 15,
     paddingRight: 30,
     borderRadius: 10,
     padding: 16,
+    backgroundColor: '#ffffff',
   },
   cartScreen: {
     marginTop: 16,
+    backgroundColor: '#fefefe',
+  },
+  titleCart: {
+    fontSize: 30,
+    height: 60,
+    marginLeft: 10,
+    fontWeight: 'bold',
+    backgroundColor: '#fefefe',
+  },
+  imgCart: { width: 60, height: 60 },
+  styleFlatlist: {
+    marginBottom: 120,
   },
 });
