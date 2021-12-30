@@ -38,7 +38,7 @@ const Home = () => {
           }}>
           <Image source={Icon.Cart} />
           <View style={styleHome.numNoti}>
-            <Text style={{ fontSize: 10 }}>{cartState.length}</Text>
+            <Text style={styleHome.cssFontSize}>{cartState.length}</Text>
           </View>
         </TouchableOpacity>
       ),
@@ -62,7 +62,7 @@ const Home = () => {
         onPress={() => navigation.navigate('ProductDetails', { idProduct })}>
         <Text style={styleHome.titleProduct}>{name}</Text>
         <Text>
-          Price: <Text style={{ color: '#53E88B' }}>{price}$</Text>
+          Price: <Text style={styleHome.cssColor53E88B}>{price}$</Text>
         </Text>
         <Image source={{ uri: img }} style={styleHome.imgProduct} />
       </TouchableOpacity>
@@ -180,5 +180,11 @@ const styleHome = StyleSheet.create({
   titleTypeProduct: {
     marginLeft: 10,
     fontWeight: 'bold',
+  },
+  cssColor53E88B: {
+    color: '#53E88B',
+  },
+  cssFontSize: {
+    fontSize: 10,
   },
 });

@@ -32,12 +32,12 @@ const Cart = () => {
   }) => {
     return (
       <View style={styleCart.cartItem}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styleCart.cssFlexRow}>
           <Image source={{ uri: image }} style={styleCart.imgCart} />
-          <View style={{ marginLeft: 10 }}>
-            <Text style={{ paddingRight: 30 }}>{title}</Text>
+          <View style={styleCart.cssMargin}>
+            <Text style={styleCart.cssPadding}>{title}</Text>
             <View>
-              <View style={{ flexDirection: 'row' }}>
+              <View style={styleCart.cssFlexRow}>
                 <Text>Quantily: </Text>
                 <TouchableOpacity
                   onPress={() => {
@@ -46,7 +46,7 @@ const Cart = () => {
                   }}>
                   <Image source={Icon.Minus} style={styleCart.iconQuantity} />
                 </TouchableOpacity>
-                <Text style={{ borderWidth: 1 }}> {quantity} </Text>
+                <Text style={styleCart.cssBorderWidth}> {quantity} </Text>
                 <TouchableOpacity
                   onPress={() => {
                     dispatch(cartActions.quantityIncreament({ id }));
@@ -58,7 +58,7 @@ const Cart = () => {
             </View>
             <Text>
               Price:{' '}
-              <Text style={{ color: '#53E88B' }}>{price * quantity}$</Text>
+              <Text style={styleCart.cssColor53E88B}>{price * quantity}$</Text>
             </Text>
           </View>
         </View>
@@ -111,6 +111,12 @@ const Cart = () => {
 };
 export default Cart;
 const styleCart = StyleSheet.create({
+  cssColor53E88B: {
+    color: '#53E88B',
+  },
+  cssFlexRow: {
+    flexDirection: 'row',
+  },
   btnPayment: {
     borderWidth: 1,
     marginLeft: 200,
@@ -150,5 +156,14 @@ const styleCart = StyleSheet.create({
   imgCart: { width: 60, height: 60 },
   styleFlatlist: {
     marginBottom: 120,
+  },
+  cssMargin: {
+    marginLeft: 10,
+  },
+  cssPadding: {
+    paddingRight: 30,
+  },
+  cssBorderWidth: {
+    borderWidth: 1,
   },
 });

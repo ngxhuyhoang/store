@@ -56,9 +56,9 @@ const Account = () => {
 
   return (
     <SafeAreaView style={styleAccountScreen.accountStyle}>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styleAccountScreen.cssFlexRow}>
         <Image source={AppImage.Profile} />
-        <View style={{ flexDirection: 'column' }}>
+        <View style={styleAccountScreen.cssFlexColumn}>
           <Text style={styleAccountScreen.nameInfo}>Name: </Text>
           <Text style={styleAccountScreen.userNameInfo}>
             {`${userProfile?.name?.firstname} ${userProfile?.name?.lastname}`}
@@ -87,6 +87,12 @@ const Account = () => {
 export default Account;
 
 const styleAccountScreen = StyleSheet.create({
+  cssFlexRow: {
+    flexDirection: 'row',
+  },
+  cssFlexColumn: {
+    flexDirection: 'column',
+  },
   btnLogout: {
     backgroundColor: 'red',
     marginTop: 20,

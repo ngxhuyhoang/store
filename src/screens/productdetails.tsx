@@ -41,7 +41,7 @@ const ProductDetails = () => {
           }}>
           <Image source={Icon.Cart} />
           <View style={stylePrdDetails.numNoti}>
-            <Text style={{ fontSize: 10 }}>{cartState.length}</Text>
+            <Text style={stylePrdDetails.cssFontSize}>{cartState.length}</Text>
           </View>
         </TouchableOpacity>
       ),
@@ -49,7 +49,7 @@ const ProductDetails = () => {
   }, [cartState.length]);
 
   return (
-    <ScrollView contentContainerStyle={{ paddingHorizontal: 16 }}>
+    <ScrollView contentContainerStyle={stylePrdDetails.cssPaddingHorizontal}>
       <Text style={stylePrdDetails.titlePrdDetail}>{productDetails.title}</Text>
       <Image
         source={{
@@ -60,7 +60,9 @@ const ProductDetails = () => {
       <View style={stylePrdDetails.viewPricePrdDetail}>
         <Text style={stylePrdDetails.pricePrdDetail}>
           Price:{' '}
-          <Text style={{ color: '#53E88B' }}>{productDetails.price}$</Text>
+          <Text style={stylePrdDetails.cssColor53E88B}>
+            {productDetails.price}$
+          </Text>
         </Text>
         <TouchableOpacity
           style={stylePrdDetails.btnAddToCart}
@@ -127,5 +129,14 @@ const stylePrdDetails = StyleSheet.create({
     paddingHorizontal: 3,
     top: -10,
     right: -10,
+  },
+  cssColor53E88B: {
+    color: '#53E88B',
+  },
+  cssFontSize: {
+    fontSize: 10,
+  },
+  cssPaddingHorizontal: {
+    paddingHorizontal: 16,
   },
 });
