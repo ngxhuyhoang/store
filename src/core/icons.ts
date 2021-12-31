@@ -5,4 +5,5 @@ export enum Icon {
   Minus = require('@assets/icons/minus-icon.png'),
   Product = require('@assets/icons/product.png'),
   Account = require('@assets/icons/account.png'),
+  Search = require('@assets/icons/Icon-Search.png'),
 }

@@ -45,6 +45,18 @@ const Home = () => {
       ),
     });
   }, [cartState.length]);
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Search');
+          }}>
+          <Image source={Icon.Search} />
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
 
   const Item = ({
     name,
