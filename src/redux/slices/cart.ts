@@ -1,4 +1,3 @@
-import { statusCodes } from '@react-native-google-signin/google-signin';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {

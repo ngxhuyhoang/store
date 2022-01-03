@@ -18,7 +18,9 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const btnPayment = () => {
-    if (totalPrice === 0) return true;
+    if (totalPrice === 0) {
+      return true;
+    }
   };
 
   const OrderProduct = ({
@@ -111,8 +113,8 @@ const Cart = () => {
           disabled={btnPayment()}
           style={styleCart.btnPayment}
           onPress={() => {
-            Alert.alert('Payment success'),
-              dispatch(cartActions.paymentSuccess());
+            Alert.alert('Payment success');
+            dispatch(cartActions.paymentSuccess());
           }}>
           <Text>Payment</Text>
           <Text>Total: {totalPrice?.toFixed(2)}$</Text>

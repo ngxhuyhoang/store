@@ -186,13 +186,4 @@ const styleHome = StyleSheet.create({
   cssFontSize: {
     fontSize: 10,
   },
-  loadMore: {
-    borderWidth: 1,
-    borderRadius: 16,
-    width: 100,
-    alignItems: 'center',
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignSelf: 'center',
-  },
 });

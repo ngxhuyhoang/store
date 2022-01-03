@@ -70,7 +70,7 @@ const Account = () => {
       </Text>
       <Text style={styleAccountScreen.titleInfo}>Phone: </Text>
       <Text style={styleAccountScreen.userInfo}>{userProfile.phone}</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={styles.css1}>
         <TouchableOpacity
           style={styleAccountScreen.btnEdit}
           onPress={() => setModalVisible(true)}>
@@ -208,6 +208,7 @@ const Account = () => {
 export default Account;
 
 const styles = StyleSheet.create({
+  css1: { flexDirection: 'row', justifyContent: 'space-between' },
   centeredView: {
     flex: 1,
     justifyContent: 'center',
