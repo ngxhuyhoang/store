@@ -4,6 +4,7 @@ import RootStack from './root-stack';
 import Account from '@screens/account';
 import { Image } from 'react-native';
 import { Icon } from '@core/icons';
+import AllProduct from '@screens/allproduct';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +19,16 @@ export default function TabNavigator() {
           tabBarIcon: ({ color }) => (
             <Image source={Icon.Product} style={{ tintColor: color }} />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="AllProduct"
+        component={AllProduct}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Image source={Icon.Hand} style={{ tintColor: color }} />
+          ),
+          title: 'All product',
         }}
       />
       <Tab.Screen

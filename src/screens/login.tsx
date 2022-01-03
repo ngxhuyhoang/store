@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styled from 'styled-components/native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '@redux/slices/auth';
 
 const Container = styled.View``;
@@ -23,21 +23,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [allAcount, setAllAcount] = useState([]);
 
-  const userAdmin = {
-    address: {
-      geolocation: { lat: '-37.3159', long: '81.1496' },
-      city: 'Hà Nội',
-      street: 'Yên Duyên',
-      number: 7682,
-      zipcode: '10000',
-    },
-    id: 21,
-    email: 'conlilo273@gmail.com',
-    username: 'Conlilo',
-    password: '123456',
-    name: { firstname: 'Nguyễn', lastname: 'Chiến' },
-    phone: '098-429-8754',
-  };
+  const userAdmin = useSelector(state => state.account.userAdmin);
   const getAccount = async () => {
     const res = await axios.get('https://fakestoreapi.com/users');
     setAllAcount(res.data);

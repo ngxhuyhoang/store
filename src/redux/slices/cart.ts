@@ -1,8 +1,23 @@
+import { statusCodes } from '@react-native-google-signin/google-signin';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   cart: [],
   totalPrice: 0,
+  limit: 6,
+};
+
+const paymentSuccess = state => {
+  state.cart = [];
+  state.totalPrice = 0;
+};
+
+const resetLimit = state => {
+  state.limit = 6;
+};
+
+const loadMore = state => {
+  state.limit += 4;
 };
 
 const addToCart = (state, action) => {
@@ -47,6 +62,13 @@ const caculateTotalPrice = state => {
   }, 0);
 };
 
+const deleteItemCart = (state, action) => {
+  state.cart = state.cart.filter(x => x.id !== action.payload.id);
+  state.totalPrice = state.cart.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.quantity * currentValue.price;
+  }, 0);
+};
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -55,6 +77,10 @@ const cartSlice = createSlice({
     quantityIncreament,
     quantityDecreament,
     caculateTotalPrice,
+    loadMore,
+    resetLimit,
+    paymentSuccess,
+    deleteItemCart,
   },
 });
 

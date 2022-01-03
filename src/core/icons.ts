@@ -6,4 +6,6 @@ export enum Icon {
   Product = require('@assets/icons/product.png'),
   Account = require('@assets/icons/account.png'),
   Search = require('@assets/icons/Icon-Search.png'),
+  Hand = require('@assets/icons/hand.png'),
+  Trash = require('@assets/icons/trash.png'),
 }

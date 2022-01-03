@@ -5,15 +5,18 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@core/icons';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const Search = () => {
   const [products, getProducts] = useState<any>([]);
   const [searchText, getSearchText] = useState('');
+  const navigation = useNavigation();
 
   const getProductBySearch = async () => {
     const res = await axios.get('https://fakestoreapi.com/products?limit=50');
@@ -26,28 +29,33 @@ const Search = () => {
   };
 
   const Item = ({
+    idProduct,
     title,
     image,
     price,
   }: {
+    idProduct: number;
     title: string;
     image: string;
     price: number;
   }) => {
     return (
-      <View style={styleCart.cartScreen}>
-        <View style={styleCart.cartItem}>
-          <View style={styleCart.cssFlexRow}>
-            <Image source={{ uri: image }} style={styleCart.imgCart} />
-            <View style={styleCart.cssMargin}>
-              <Text style={styleCart.cssPadding}>{title}</Text>
-              <Text>
-                Price: <Text style={styleCart.cssColor53E88B}>{price}$</Text>
-              </Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('ProductDetails', { idProduct })}>
+        <View style={styleCart.cartScreen}>
+          <View style={styleCart.cartItem}>
+            <View style={styleCart.cssFlexRow}>
+              <Image source={{ uri: image }} style={styleCart.imgCart} />
+              <View style={styleCart.cssMargin}>
+                <Text style={styleCart.cssPadding}>{title}</Text>
+                <Text>
+                  Price: <Text style={styleCart.cssColor53E88B}>{price}$</Text>
+                </Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -55,12 +63,20 @@ const Search = () => {
     item,
   }: {
     item: {
+      idProduct: number;
       title: string;
       image: string;
       price: number;
     };
   }) => {
-    return <Item title={item.title} image={item.image} price={item.price} />;
+    return (
+      <Item
+        idProduct={item.id}
+        title={item.title}
+        image={item.image}
+        price={item.price}
+      />
+    );
   };
 
   useEffect(() => {
@@ -93,7 +109,7 @@ const Search = () => {
         <Image source={Icon.Search} style={{ flex: 1 }} />
         <TextInput
           placeholder="Tìm kiếm ..."
-          style={{ flex: 14, marginLeft: 10 }}
+          style={{ flex: 14, marginLeft: 10, paddingVertical: 0 }}
           onChangeText={(text: string) => getSearchText(text)}
           value={searchText}
         />
@@ -101,6 +117,7 @@ const Search = () => {
       <Text style={{ marginLeft: 10, fontWeight: 'bold' }}>
         Bạn đang tìm kiếm '{searchText}'
       </Text>
+
       <FlatList
         data={products.filter((p: any) => p.verification >= 0)}
         renderItem={renderItem}

@@ -17,6 +17,10 @@ const Cart = () => {
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const dispatch = useDispatch();
 
+  const btnPayment = () => {
+    if (totalPrice === 0) return true;
+  };
+
   const OrderProduct = ({
     id,
     title,
@@ -53,6 +57,16 @@ const Cart = () => {
                     dispatch(cartActions.caculateTotalPrice());
                   }}>
                   <Image source={Icon.Plus} style={styleCart.iconQuantity} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => dispatch(cartActions.deleteItemCart({ id }))}>
+                  <Image
+                    source={Icon.Trash}
+                    style={
+                      (styleCart.iconQuantity,
+                      { backgroundColor: 'red', borderRadius: 4 })
+                    }
+                  />
                 </TouchableOpacity>
               </View>
             </View>
@@ -94,8 +108,12 @@ const Cart = () => {
       <View>
         <Text style={styleCart.titleCart}>Your Order</Text>
         <TouchableOpacity
+          disabled={btnPayment()}
           style={styleCart.btnPayment}
-          onPress={() => Alert.alert('Payment success')}>
+          onPress={() => {
+            Alert.alert('Payment success'),
+              dispatch(cartActions.paymentSuccess());
+          }}>
           <Text>Payment</Text>
           <Text>Total: {totalPrice?.toFixed(2)}$</Text>
         </TouchableOpacity>
@@ -130,7 +148,7 @@ const styleCart = StyleSheet.create({
     borderRadius: 16,
     position: 'absolute',
   },
-  iconQuantity: { width: 40, height: 20, borderRadius: 10 },
+  iconQuantity: { width: 40, height: 25, borderRadius: 10 },
   cartItem: {
     flex: 1,
     borderWidth: 1,
@@ -167,5 +185,6 @@ const styleCart = StyleSheet.create({
   },
   cssBorderWidth: {
     borderWidth: 1,
+    alignSelf: 'center',
   },
 });
