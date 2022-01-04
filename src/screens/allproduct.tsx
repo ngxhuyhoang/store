@@ -51,8 +51,7 @@ const AllProduct = () => {
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Cart');
-          }}
-          style={{ marginRight: 16 }}>
+          }}>
           <Image source={Icon.Cart} />
           <View style={styleHome.numNoti}>
             <Text style={styleHome.cssFontSize}>{cartState.length}</Text>
@@ -63,8 +62,7 @@ const AllProduct = () => {
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-          style={{ marginLeft: 16 }}>
+          }}>
           <Image source={Icon.Search} />
         </TouchableOpacity>
       ),
