@@ -59,21 +59,17 @@ const AllProduct = () => {
           </View>
         </TouchableOpacity>
       ),
-    });
-  }, [cartState.length]);
-  useEffect(() => {
-    navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Search');
+            navigation.goBack();
           }}
           style={{ marginLeft: 16 }}>
           <Image source={Icon.Search} />
         </TouchableOpacity>
       ),
     });
-  }, []);
+  }, [cartState.length]);
 
   const Item = ({
     name,
@@ -90,7 +86,9 @@ const AllProduct = () => {
       <TouchableOpacity
         style={styleHome.popularRestaurant}
         onPress={() => navigation.navigate('ProductDetails', { idProduct })}>
-        <Text style={styleHome.titleProduct}>{name}</Text>
+        <Text numberOfLines={5} style={styleHome.titleProduct}>
+          {name}
+        </Text>
         <Text>
           Price: <Text style={styleHome.cssColor53E88B}>{price}$</Text>
         </Text>

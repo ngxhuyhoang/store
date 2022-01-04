@@ -1,8 +1,7 @@
 import { AppImage } from '@core/images';
 import { accountActions } from '@redux/slices/account';
 import { authActions } from '@redux/slices/auth';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   Image,
@@ -16,8 +15,6 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 const Account = () => {
-  const stateUsername = useSelector(state => state.auth.username);
-  const [account, getAccount] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -27,15 +24,8 @@ const Account = () => {
   const [phone, setPhone] = useState('');
   const dispatch = useDispatch();
 
-  const getAccountAsync = async () => {
-    const res = await axios.get('https://fakestoreapi.com/users');
-    getAccount(res.data);
-  };
+  const userProfile = useSelector(state => state.account.account)[0];
 
-  const userAdmin = useSelector(state => state.account.userAdmin);
-  const userProfile = [...account, userAdmin].filter(
-    x => x.username === stateUsername || x.email === stateUsername,
-  )[0];
   const btnLogout = () => {
     Alert.alert('Logout', 'Are you sure to logout?', [
       {
@@ -45,10 +35,6 @@ const Account = () => {
       { text: 'Cancel' },
     ]);
   };
-
-  useEffect(() => {
-    getAccountAsync();
-  }, []);
 
   return (
     <SafeAreaView style={styleAccountScreen.accountStyle}>
@@ -65,7 +51,7 @@ const Account = () => {
       <Text style={styleAccountScreen.titleInfo}>Email:</Text>
       <Text style={styleAccountScreen.userInfo}>{userProfile?.email}</Text>
       <Text style={styleAccountScreen.titleInfo}>Address:</Text>
-      <Text style={styleAccountScreen.userInfo}>
+      <Text style={styleAccountScreen.captucalizeCss}>
         {userProfile?.address?.street} street, {userProfile?.address?.city}
       </Text>
       <Text style={styleAccountScreen.titleInfo}>Phone: </Text>
@@ -244,6 +230,9 @@ const styles = StyleSheet.create({
   },
   inputText: {
     borderWidth: 0,
+    width: 150,
+    height: 20,
+    backgroundColor: '#c4c4c4',
   },
 });
 
@@ -280,6 +269,7 @@ const styleAccountScreen = StyleSheet.create({
   titleInfo: { fontSize: 30, marginTop: 30 },
   userInfo: { marginLeft: 14, fontSize: 24 },
   nameInfo: { marginLeft: 10, fontSize: 30 },
+  captucalizeCss: { textTransform: 'capitalize', marginLeft: 14, fontSize: 24 },
   userNameInfo: {
     marginLeft: 10,
     fontSize: 24,

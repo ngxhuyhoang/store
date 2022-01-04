@@ -13,7 +13,7 @@
 
 ## Feature
 
-- [] Login by Google using Firebase
+- [] Login
 - [] Show list product
 - [] Show user profile
 - [] Add to cart

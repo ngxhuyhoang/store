@@ -73,7 +73,9 @@ const Home = () => {
       <TouchableOpacity
         style={styleHome.popularRestaurant}
         onPress={() => navigation.navigate('ProductDetails', { idProduct })}>
-        <Text style={styleHome.titleProduct}>{name}</Text>
+        <Text numberOfLines={5} style={styleHome.titleProduct}>
+          {name}
+        </Text>
         <Text>
           Price: <Text style={styleHome.cssColor53E88B}>{price}$</Text>
         </Text>

@@ -13,6 +13,7 @@ import {
 import styled from 'styled-components/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '@redux/slices/auth';
+import { accountActions } from '@redux/slices/account';
 
 const Container = styled.View``;
 
@@ -28,6 +29,7 @@ const Login = () => {
     const res = await axios.get('https://fakestoreapi.com/users');
     setAllAcount(res.data);
   };
+
   useEffect(() => {
     getAccount();
   }, []);
@@ -59,6 +61,13 @@ const Login = () => {
       createAlertLogin();
     } else {
       dispatch(authActions.onLogin({ login: 'login-success', username }));
+      dispatch(
+        accountActions.settingAccount(
+          [...allAcount, userAdmin].filter(
+            x => x.username === username || x.email === username,
+          ),
+        ),
+      );
     }
   };
 

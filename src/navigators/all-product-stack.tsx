@@ -1,19 +1,19 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '@screens/home';
+import AllProduct from '@screens/allproduct';
 
 const Stack = createNativeStackNavigator();
 
-const RootStack = () => {
+const AllProductStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ title: 'Trang chủ' }}
+        name="AllProduct"
+        component={AllProduct}
+        options={{ title: 'Tất cả sản phẩm' }}
       />
     </Stack.Navigator>
   );
 };
 
-export default RootStack;
+export default AllProductStack;

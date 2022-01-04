@@ -17,39 +17,46 @@ const initialState = {
     phone: '098-429-8754',
   },
   text: 1,
+  accout: {},
 };
+
+const settingAccount = (state, action) => {
+  state.account = action.payload;
+  console.log(state.account);
+};
+
 const updateAccountFirstname = (state, action) => {
   if (action.payload.firstname !== '') {
-    state.userAdmin.name.firstname = action.payload.firstname;
+    state.account[0].name.firstname = action.payload.firstname;
   }
 };
 const updateAccountLastname = (state, action) => {
   if (action.payload.lastname !== '') {
-    state.userAdmin.name.lastname = action.payload.lastname;
+    state.account[0].name.lastname = action.payload.lastname;
   }
 };
 
 const updateAccountEmail = (state, action) => {
   if (action.payload.email !== '') {
-    state.userAdmin.email = action.payload.email;
+    state.account[0].email = action.payload.email;
   }
 };
 
 const updateAccountCity = (state, action) => {
   if (action.payload.city !== '') {
-    state.userAdmin.address.city = action.payload.city;
+    state.account[0].address.city = action.payload.city;
   }
 };
 
 const updateAccountStreet = (state, action) => {
   if (action.payload.street !== '') {
-    state.userAdmin.address.street = action.payload.street;
+    state.account[0].address.street = action.payload.street;
   }
 };
 
 const updateAccountPhone = (state, action) => {
   if (action.payload.phone !== '') {
-    state.userAdmin.phone = action.payload.phone;
+    state.account[0].phone = action.payload.phone;
   }
 };
 
@@ -63,6 +70,7 @@ const accountSlice = createSlice({
     updateAccountCity,
     updateAccountStreet,
     updateAccountPhone,
+    settingAccount,
   },
 });
 
