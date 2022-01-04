@@ -130,11 +130,6 @@ const AllProduct = () => {
         style={{ marginBottom: 50 }}
         onEndReached={() => dispatch(cartActions.loadMore())}
       />
-      {/* <TouchableOpacity
-        style={styleHome.loadMore}
-        onPress={() => dispatch(cartActions.loadMore())}>
-        <Text>Load more</Text>
-      </TouchableOpacity> */}
     </Container>
   );
 };

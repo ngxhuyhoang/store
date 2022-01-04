@@ -57,19 +57,19 @@ const Account = () => {
         <View style={styleAccountScreen.cssFlexColumn}>
           <Text style={styleAccountScreen.nameInfo}>Name: </Text>
           <Text style={styleAccountScreen.userNameInfo}>
-            {`${userProfile.name.firstname} ${userProfile.name.lastname}`}
+            {`${userProfile?.name?.firstname} ${userProfile?.name?.lastname}`}
           </Text>
         </View>
       </View>
 
       <Text style={styleAccountScreen.titleInfo}>Email:</Text>
-      <Text style={styleAccountScreen.userInfo}>{userProfile.email}</Text>
+      <Text style={styleAccountScreen.userInfo}>{userProfile?.email}</Text>
       <Text style={styleAccountScreen.titleInfo}>Address:</Text>
       <Text style={styleAccountScreen.userInfo}>
-        {userProfile.address.street} street, {userProfile.address.city}
+        {userProfile?.address?.street} street, {userProfile?.address?.city}
       </Text>
       <Text style={styleAccountScreen.titleInfo}>Phone: </Text>
-      <Text style={styleAccountScreen.userInfo}>{userProfile.phone}</Text>
+      <Text style={styleAccountScreen.userInfo}>{userProfile?.phone}</Text>
       <View style={styles.css1}>
         <TouchableOpacity
           style={styleAccountScreen.btnEdit}
@@ -172,15 +172,15 @@ const Account = () => {
                   onPress={() => {
                     setModalVisible(!modalVisible);
                     dispatch(
-                      accountActions.updateAccount({
-                        lastname: lastname,
-                        firstname: firstname,
-                        email: email,
-                        city: city,
-                        street: street,
-                        phone: phone,
-                      }),
+                      accountActions.updateAccountLastname({ lastname }),
                     );
+                    dispatch(
+                      accountActions.updateAccountFirstname({ firstname }),
+                    );
+                    dispatch(accountActions.updateAccountEmail({ email }));
+                    dispatch(accountActions.updateAccountCity({ city }));
+                    dispatch(accountActions.updateAccountStreet({ street }));
+                    dispatch(accountActions.updateAccountPhone({ phone }));
                   }}>
                   <Text style={styles.textStyle}>Save</Text>
                 </TouchableOpacity>

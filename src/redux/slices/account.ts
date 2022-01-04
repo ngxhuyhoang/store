@@ -18,20 +18,52 @@ const initialState = {
   },
   text: 1,
 };
+const updateAccountFirstname = (state, action) => {
+  if (action.payload.firstname !== '') {
+    state.userAdmin.name.firstname = action.payload.firstname;
+  }
+};
+const updateAccountLastname = (state, action) => {
+  if (action.payload.lastname !== '') {
+    state.userAdmin.name.lastname = action.payload.lastname;
+  }
+};
 
-const updateAccount = (state, action) => {
-  state.userAdmin.name.firstname = action.payload.firstname;
-  state.userAdmin.name.lastname = action.payload.lastname;
-  state.userAdmin.email = action.payload.email;
-  state.userAdmin.address.city = action.payload.city;
-  state.userAdmin.address.street = action.payload.street;
-  state.userAdmin.phone = action.payload.phone;
+const updateAccountEmail = (state, action) => {
+  if (action.payload.email !== '') {
+    state.userAdmin.email = action.payload.email;
+  }
+};
+
+const updateAccountCity = (state, action) => {
+  if (action.payload.city !== '') {
+    state.userAdmin.address.city = action.payload.city;
+  }
+};
+
+const updateAccountStreet = (state, action) => {
+  if (action.payload.street !== '') {
+    state.userAdmin.address.street = action.payload.street;
+  }
+};
+
+const updateAccountPhone = (state, action) => {
+  if (action.payload.phone !== '') {
+    state.userAdmin.phone = action.payload.phone;
+  }
 };
 
 const accountSlice = createSlice({
   name: 'account',
   initialState,
-  reducers: { updateAccount },
+  reducers: {
+    updateAccountFirstname,
+    updateAccountLastname,
+    updateAccountEmail,
+    updateAccountCity,
+    updateAccountStreet,
+    updateAccountPhone,
+  },
 });
 
 export const accountActions = accountSlice.actions;
